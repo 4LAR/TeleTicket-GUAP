@@ -1,0 +1,2 @@
+# TeleTicket-GUAP
+### Я НАСРАЛ
