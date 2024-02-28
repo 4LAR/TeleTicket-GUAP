@@ -5,7 +5,6 @@ import json
 from difflib import SequenceMatcher
 
 TOKEN = "5433379156:AAGu2v4NXjC677CZPzpVWmob-Yja-rbD6Po"
-threshold = 0.5
 
 ################################################################################
 
@@ -33,7 +32,7 @@ def get_ticket(answer):
         percent_arr.append([ticket, percent])
 
     percent_arr.sort(key=lambda val: val[1], reverse=True)
-    return percent_arr[0][0]['answer'], percent_arr[0][1]
+    return percent_arr[0][0], percent_arr[0][1]
 
 ################################################################################
 
@@ -46,6 +45,6 @@ def start(m, res=False):
 @bot.message_handler(content_types=["text"])
 def handle_text(message):
     answer = get_ticket(message.text)
-    bot.send_message(message.chat.id, "Совпадение %.2f%% \n%s" % (answer[1] * 100, answer[0]))
+    bot.send_message(message.chat.id, "Совпадение %.2f%%\n\"%s\"\n\n%s" % (answer[1] * 100, answer[0]['question'], answer[0]['answer']))
 
 bot.polling(none_stop=True, interval=0)
